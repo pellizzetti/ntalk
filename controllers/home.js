@@ -1,4 +1,5 @@
 module.exports = function(app) {
+	
 	var HomeController = {
 		
 		index: function(req, res) {
@@ -27,4 +28,3 @@ module.exports = function(app) {
 	
 	return HomeController;
 };
-

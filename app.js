@@ -1,3 +1,5 @@
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+
 var express        = require('express');
 var session        = require('express-session');
 var bodyParser     = require('body-parser');
@@ -7,7 +9,10 @@ var consign        = require('consign');
 var hbs            = require('hbs');
 var error          = require('./middlewares/error');
 
-var app = express();
+var app    = express();
+var server = require('http').Server(app);
+var port   = process.env.PORT || 5777;
+var io     = require('socket.io')(server)
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'hbs');
@@ -34,9 +39,17 @@ consign()
 	.then('routes')
 	.into(app);
 	
+io.sockets.on('connection', function (client) {
+	client.on('send-server', function (data) { 
+		var msg = "<b>" + data.name + ":</b> " + data.msg + "<br>";
+		client.emit('send-client', msg); 
+		client.broadcast.emit('send-client', msg); 
+	}); 
+});
+	
 app.use(error.notFound);
 app.use(error.serverError);
 
-app.listen(5777, function() {
-	console.log("Server rodando em localhost:5777");
+server.listen(port, function() {
+	console.log("Running at http://localhost:" + port);
 });

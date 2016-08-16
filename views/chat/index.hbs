@@ -1,0 +1,32 @@
+{{>header}}
+<script src="/socket.io/socket.io.js"></script>
+<script>
+	var socket = io('http://localhost:5777'); 
+	
+	socket.on('send-client', function (msg) { 
+		document.getElementById('chat').innerHTML += msg;
+	});
+	
+	var enviar = function() { 
+		var name = document.getElementById('name').value; 
+		var msg  = document.getElementById('msg').value; 
+		
+		socket.emit('send-server', {name: name, msg: msg}); 
+	}; 
+</script>
+<header class="row-fluid text-center">
+  <h2>Ntalk - Chat</h2>
+</header>
+<section class="row-fluid">
+	<div class="well span6 offset3">
+		<pre id="chat" class="pre-scrollable" style="width:auto;height:250px;"></pre>
+		<div class="input-append">
+			<input type="hidden" id="name" value="{{user.name}}">
+			<input type="text" id="msg" class="input-xlarge" placeholder="Digite sua mensagem">
+			<button class="btn btn-success" onclick="enviar();">Enviar</button>
+			<a href="/contacts" class="btn btn-inverse">Sair do chat</a>
+		</div>
+	</div>
+</section>
+{{>exit}}
+{{>footer}}

@@ -1,5 +1,7 @@
 module.exports = function(app) {
+	
 	var ContactsController = {
+		
 		index: function(req, res) {
 			var user     = req.session.user;
 			var contacts = user.contacts;
