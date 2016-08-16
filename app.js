@@ -1,17 +1,15 @@
 var express        = require('express');
 var session        = require('express-session');
 var bodyParser     = require('body-parser');
-//var cookieParser = require('cookie-parser');
 var methodOverride = require('method-override');
 var consign        = require('consign');
 var hbs            = require('hbs');
+var error          = require('./middlewares/error');
 
 var app = express();
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'hbs');
-
-//app.use(cookieParser('ntalk'));
 
 app.use(methodOverride('_method'));
 
@@ -33,6 +31,9 @@ consign()
 	.include('controllers')
 	.then('routes')
 	.into(app);
+	
+app.use(error.notFound);
+app.use(error.serverError);
 
 app.listen(5777, function() {
 	console.log("Server rodando em localhost:5777");
