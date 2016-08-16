@@ -1,0 +1,15 @@
+{{>header}}
+<header>
+	<h2>Ntalk - Agenda de contatos</h2>
+</header>
+<section>
+	<form action="/contact/{{id}}?_method=put" method="post">
+		<label>Nome:</label>
+		<input type="text" name="contact[name]"value="{{name}}">
+		<label>E-mail:</label>
+		<input type="text" name="contact[email]"value="{{email}}">
+		<button type="submit">Atualizar</button>
+	</form>
+</section>
+{{>exit}}
+{{>footer}}

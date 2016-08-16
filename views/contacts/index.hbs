@@ -1,0 +1,33 @@
+{{>header}}
+<header>
+	<h2>Ntalk - Agenda de contatos</h2>
+</header>
+<section>
+	<form action="/contact" method="post">
+		<input type="text" name="contact[name]"	placeholder="Nome">
+		<input type="text" name="contact[email]" placeholder="E-mail">
+		<button type="submit">Cadastrar</button>
+	</form>
+	<table>
+		<thead>
+			<tr>
+				<th>Nome</th>
+				<th>E-mail</th>
+				<th>Ação</th>
+			</tr>
+		</thead>
+		<tbody>
+		{{#each contacts as |contact idContact|}}
+			<tr>
+				<td>{{contact.name}}</td>
+				<td>{{contact.email}}</td>
+				<td>
+					<a href="/contact/{{idContact}}">Detalhes</a>
+				</td>
+			</tr>
+		{{/each}}>
+		</tbody>
+	</table>
+</section>
+{{>exit}}
+{{>footer}}
