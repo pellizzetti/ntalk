@@ -1,33 +1,35 @@
 {{>header}}
-<header>
-	<h2>Ntalk - Agenda de contatos</h2>
+<header class="row-fluid text-center">
+  <h2>Ntalk - Agenda de contatos</h2>
 </header>
-<section>
-	<form action="/contact" method="post">
-		<input type="text" name="contact[name]"	placeholder="Nome">
-		<input type="text" name="contact[email]" placeholder="E-mail">
-		<button type="submit">Cadastrar</button>
-	</form>
-	<table>
-		<thead>
-			<tr>
-				<th>Nome</th>
-				<th>E-mail</th>
-				<th>Ação</th>
-			</tr>
-		</thead>
-		<tbody>
+<section class="row-fluid">
+  <section class="span12">
+    <form action="/contact" method="post" class="well form-inline">
+      <input type="text" name="contact[name]" placeholder="Nome">
+      <input type="text" name="contact[email]" placeholder="E-mail">
+      <button type="submit" class="btn btn-primary">Cadastrar</button>
+    </form>
+    <table class="table well">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>E-mail</th>
+          <th>Ação</th>
+        </tr>
+      </thead>
+      <tbody>
 		{{#each contacts as |contact idContact|}}
 			<tr>
 				<td>{{contact.name}}</td>
 				<td>{{contact.email}}</td>
 				<td>
-					<a href="/contact/{{idContact}}">Detalhes</a>
+					<a href="/contact/{{idContact}}" class="btn btn-info">Detalhes</a>
 				</td>
 			</tr>
-		{{/each}}>
+		{{/each}}
 		</tbody>
-	</table>
+    </table>
+  </section>
 </section>
 {{>exit}}
 {{>footer}}

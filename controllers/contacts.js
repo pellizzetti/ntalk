@@ -57,4 +57,3 @@ module.exports = function(app) {
 
 	return ContactsController;
 };
-

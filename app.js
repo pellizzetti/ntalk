@@ -1,6 +1,7 @@
 var express        = require('express');
 var session        = require('express-session');
 var bodyParser     = require('body-parser');
+var cookieParser   = require('cookie-parser');
 var methodOverride = require('method-override');
 var consign        = require('consign');
 var hbs            = require('hbs');
@@ -12,6 +13,7 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'hbs');
 
 app.use(methodOverride('_method'));
+app.use(cookieParser('ntalk'));
 
 app.use(session({
 	resave: true, 
