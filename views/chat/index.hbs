@@ -1,8 +1,10 @@
 {{>header}}
 <script src="/socket.io/socket.io.js"></script>
 <script>
-	var socket = io('http://localhost:5777'); 
+	var socket = io.connect('');
 	
+	socket.emit('join', '{{chatroom}}');
+
 	socket.on('send-client', function (msg) { 
 		var chat = document.getElementById('chat');
 

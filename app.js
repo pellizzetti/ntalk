@@ -57,12 +57,12 @@ io.use(function(socket, next) {
 	});
 });
 
-consign()
+consign({verbose: false})
 	.include('controllers')
 	.then('routes')
 	.into(app);
 
-consign()
+consign({verbose: false})
 	.include('sockets')
 	.into(io);
 	
