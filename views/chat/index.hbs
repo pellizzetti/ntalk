@@ -4,14 +4,17 @@
 	var socket = io('http://localhost:5777'); 
 	
 	socket.on('send-client', function (msg) { 
-		document.getElementById('chat').innerHTML += msg;
+		var chat = document.getElementById('chat');
+
+		chat.innerHTML += msg;
 	});
 	
 	var enviar = function() { 
-		var name = document.getElementById('name').value; 
-		var msg  = document.getElementById('msg').value; 
+		var msg  = document.getElementById('msg'); 
 		
-		socket.emit('send-server', {name: name, msg: msg}); 
+		socket.emit('send-server', msg.value);
+
+		msg.value = ''; 
 	}; 
 </script>
 <header class="row-fluid text-center">
@@ -21,7 +24,6 @@
 	<div class="well span6 offset3">
 		<pre id="chat" class="pre-scrollable" style="width:auto;height:250px;"></pre>
 		<div class="input-append">
-			<input type="hidden" id="name" value="{{user.name}}">
 			<input type="text" id="msg" class="input-xlarge" placeholder="Digite sua mensagem">
 			<button class="btn btn-success" onclick="enviar();">Enviar</button>
 			<a href="/contacts" class="btn btn-inverse">Sair do chat</a>
