@@ -1,9 +1,39 @@
 <script src="/socket.io/socket.io.js"></script>
 <script>
 	var socket = io.connect('');
+	var notify = function(data) {
+		var id     = 'notify_' + data.email;
+		var notify = document.getElementById(id);
+
+		if (notify) {
+			notify.textContent = data.msg;
+			notify.className   = data.class;
+		}
+	}
+
+	socket.on('notify-online', function(email) {
+		var params = {email: email,
+					  msg: 'Online',
+        			  class: 'label label-success'};
+
+		notify(params);	
+	})
+
+	.on('notify-offline', function(email) {
+		var params = {email: email,
+					  msg: 'Offline',
+        			  class: 'label'};
+
+		notify(params);	
+	})
 	
-	socket.on('new-chat', function(data) {
-		var chat = document.getElementById('chat_' + data.email);
+	.on('new-chatroom', function(data) {
+		var params = {email: data.email,
+					  msg: 'Chatroom',
+        			  class: 'label label-important'};
+		var chat   = document.getElementById('chat_' + data.email);
+
+		notify(params);
 		
 		chat.href += '?chatroom=' + data.chatroom;
 	});
