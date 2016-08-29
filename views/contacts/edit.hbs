@@ -3,7 +3,7 @@
 	<h2>Ntalk - Agenda de contatos</h2>
 </header>
 <section class="row-fluid text-center">
-	<form action="/contact/{{id}}?_method=PUT" method="post" class="well form-inline">
+	<form action="/contact/{{contact._id}}?_method=PUT" method="post" class="well form-inline">
 		<h4>Editar contato</h4>
 		<label>Nome:</label>
 		<input type="text" name="contact[name]" value="{{contact.name}}" class="input-medium">

@@ -11,6 +11,7 @@ var methodOverride = require('method-override');
 var consign        = require('consign');
 var hbs            = require('hbs');
 var error          = require('./middlewares/error');
+var mongoose       = require('mongoose');
 
 var app    = express();
 var server = require('http').Server(app);
@@ -18,6 +19,8 @@ var port   = process.env.PORT || 5777;
 var io     = require('socket.io')(server);
 var cookie = cookieParser('ntalk');
 var store  = new session.MemoryStore();
+
+global.db = mongoose.connect('mongodb://localhost:27017/ntalk');
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'hbs');
@@ -58,7 +61,8 @@ io.use(function(socket, next) {
 });
 
 consign({verbose: false})
-	.include('controllers')
+	.include('models')
+	.then('controllers')
 	.then('routes')
 	.into(app);
 

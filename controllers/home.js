@@ -1,4 +1,5 @@
 module.exports = function(app) {
+	var User = app.models.user;
 	
 	var HomeController = {
 		
@@ -7,17 +8,26 @@ module.exports = function(app) {
 		},
 
 		login: function(req, res) {
-			var name  = req.body.user.name;
-			var email = req.body.user.email;
-			
-			if (name && email) {
-				var user = req.body.user;
-				user['contacts'] = [];
-				req.session.user = user;
-				res.redirect('/contacts');
-			} else {
-				res.redirect('/');
-			}
+			var query = {email: req.body.user.email}
+
+			User.findOne(query)
+				.select('name email')
+				.exec(function(err, user){
+					if (user) {
+						req.session.user = user;
+						res.redirect('/contacts');
+					} else {
+						var user = req.body.user;
+						User.create(user, function(err, user) {
+							if (err) {
+								res.redirect('/');
+							} else {
+								req.session.user = user;
+								res.redirect('/contacts');
+							}
+						})
+					}
+				});
 		},
 
 		logout: function(req, res) {

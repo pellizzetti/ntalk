@@ -19,16 +19,16 @@
         </tr>
       </thead>
       <tbody>
-		{{#each contacts as |contact idContact|}}
+		{{#each contacts}}
 			<tr>
-				<td>{{contact.name}}</td>
-				<td>{{contact.email}}</td>
+				<td>{{name}}</td>
+				<td>{{email}}</td>
         <td>
-          <span id="notify_{{contact.email}}" class="label">Offline</span>
+          <span id="notify_{{email}}" class="label">Offline</span>
         </td>
 				<td>
-					<a href="/contact/{{idContact}}" class="btn btn-info">Detalhes</a>
-					<a href="/chat" id="chat_{{contact.email}}" class="btn btn-inverse">Conversar</a>
+					<a href="/contact/{{_id}}" class="btn btn-info">Detalhes</a>
+					<a href="/chat" id="chat_{{email}}" class="btn btn-inverse">Conversar</a>
 				</td>
 			</tr>
 		{{/each}}
