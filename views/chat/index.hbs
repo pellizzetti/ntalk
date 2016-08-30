@@ -16,7 +16,8 @@
 		
 		socket.emit('send-server', msg.value);
 
-		msg.value = ''; 
+		msg.value = '';
+		msg.focus();
 	}; 
 </script>
 <header class="row-fluid text-center">
