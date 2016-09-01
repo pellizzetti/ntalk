@@ -1,6 +1,3 @@
-const KEY    = 'ntalk.sid';
-const SECRET = 'ntalk';
-
 var express        = require('express');
 var session        = require('express-session');
 var bodyParser     = require('body-parser');
@@ -11,6 +8,7 @@ var hbs            = require('hbs');
 var error          = require('./middlewares/error');
 
 var app    = express();
+require('dotenv').config();
 var server = require('http').Server(app);
 var port   = process.env.PORT || 5777;
 var io     = require('socket.io')(server);
@@ -26,8 +24,8 @@ app.use(cookie);
 app.use(session({
 	resave: true, 
 	saveUninitialized: true,
-	key: KEY,
-	secret: SECRET, 
+	key: process.env.SESSION_KEY,
+	secret: process.env.SESSION_SECRET, 
 	store: store
 }));
 

@@ -20,7 +20,6 @@ module.exports = function(app) {
 						var user = req.body.user;
 						User.create(user, function(err, user) {
 							if (err) {
-								console.log(err);
 								res.redirect('/');
 							} else {
 								req.session.user = user;
