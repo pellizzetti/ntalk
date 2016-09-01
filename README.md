@@ -29,11 +29,17 @@ Rename the `.env.example` => `.env` and set the variables as needed.
 
 ## Running
 
+Set `NODE_ENV=development`.
+
+This is a simple application, users are automatically created at the `/POST login`.
+
 ```
 npm start
 ```
 
 ## Testing
+
+Set `NODE_ENV=test`.
 
 ```
 npm test

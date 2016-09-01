@@ -40,7 +40,7 @@ io.use(function(socket, next) {
 	var data = socket.request;
 	
 	cookie(data, {}, function(err) {
-		var sessionID = data.signedCookies[KEY];
+		var sessionID = data.signedCookies[process.env.SESSION_KEY];
 		
 		store.get(sessionID, function(err, session) {
 			if (err || !session) {

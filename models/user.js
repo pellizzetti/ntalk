@@ -13,19 +13,5 @@ module.exports = function(app) {
 		contacts: [contactSchema]
 	});
 
-	userSchema.paths.name.validate(function (value, respond) {
-	    if (value == '' || !value) {
-	    	return respond(true);
-	    }
-	    return respond(false);
-	}, 'name empty'); 
-
-	userSchema.paths.email.validate(function (value, respond) {
-	    if (value == '' || !value) {
-	    	return respond(true);
-	    }
-	    return respond(false);
-	}, 'email empty');
-
 	return db.model('users', userSchema);
 };
