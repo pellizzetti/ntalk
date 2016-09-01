@@ -25,6 +25,8 @@ Installing Dependencies:
 npm install
 ```
 
+Rename the `.env.example` => `.env` and set the variables as needed.
+
 ## Running
 
 ```
