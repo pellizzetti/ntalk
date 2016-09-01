@@ -8,11 +8,11 @@ module.exports = function(app) {
 		},
 
 		login: function(req, res) {
-			var query = {email: req.body.user.email}
+			var query = {email: req.body.user.email};
 
 			User.findOne(query)
 				.select('name email')
-				.exec(function(err, user){
+				.exec(function(err, user) {
 					if (user) {
 						req.session.user = user;
 						res.redirect('/contacts');
@@ -20,12 +20,13 @@ module.exports = function(app) {
 						var user = req.body.user;
 						User.create(user, function(err, user) {
 							if (err) {
+								console.log(err);
 								res.redirect('/');
 							} else {
 								req.session.user = user;
 								res.redirect('/contacts');
 							}
-						})
+						});
 					}
 				});
 		},

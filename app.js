@@ -1,5 +1,3 @@
-process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-
 const KEY    = 'ntalk.sid';
 const SECRET = 'ntalk';
 
@@ -71,5 +69,7 @@ app.use(error.notFound);
 app.use(error.serverError);
 
 server.listen(port, function() {
-	console.log("Running at http://localhost:" + port);
+	console.log('Running at http://localhost:' + port + '\n');
 });
+
+module.exports = app;

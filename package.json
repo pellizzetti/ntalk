@@ -1,7 +1,11 @@
 {
   "name": "ntalk",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
+  "scripts": {
+    "start": "node app.js",
+    "test": "SET NODE_ENV=test && mocha ./test/*.js"
+  },
   "dependencies": {
     "body-parser": "^1.15.1",
     "consign": "^0.1.2",
